@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Opus 5.5 — превью</title>
+<style>
+@font-face { font-family: Unb; src: url(assets/fonts/Unbounded-VF.ttf); font-weight: 200 900; }
+@font-face { font-family: Man; src: url(assets/fonts/Manrope-VF.ttf); font-weight: 200 800; }
+:root { --ink: #1d1233; --muted: #7b6e93; --red: #ef3a5d; --green: #14b26a; --mint: #4fe3b2; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { position: relative; overflow: hidden; background: #3e0c5c; font-family: Man, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+body.h { width: 1920px; height: 1080px; }
+body.v { width: 1080px; height: 1920px; }
+.abs { position: absolute; }
+
+/* фон как в ролике + свечение за героем */
+#bg { inset: 0; background: radial-gradient(120% 90% at var(--gx) var(--gy), #7a2cbd 0%, #5a168c 40%, #3a0a56 100%); }
+#glow { inset: 0; background: radial-gradient(circle at var(--gx) var(--gy), rgba(255,196,120,.55) 0, rgba(255,140,90,.22) 16%, transparent 34%); mix-blend-mode: screen; }
+#star { opacity: .6; }
+#grid { inset: 0; background-image: linear-gradient(rgba(206,160,255,.28) 2px, transparent 2px), linear-gradient(90deg, rgba(206,160,255,.28) 2px, transparent 2px); background-size: 108px 108px; background-position: -1px -1px; }
+#vig { inset: 0; background: radial-gradient(120% 95% at 50% 45%, transparent 55%, rgba(20,0,35,.6) 100%); }
+#rays { opacity: .35; mix-blend-mode: screen; }
+
+/* объёмный текст */
+.t3d { position: relative; font-weight: 900; font-family: Unb; line-height: 1; letter-spacing: -2px; color: transparent; white-space: nowrap; }
+.t3d::before, .t3d::after { content: attr(data-text); position: absolute; left: 0; top: 0; }
+.t3d::before { color: var(--ex); text-shadow: 0 3px var(--ex), 0 6px var(--ex), 0 9px var(--ex), 0 12px var(--ex), 0 15px var(--ex), 0 18px var(--ex), 0 30px 34px rgba(15,0,30,.55); }
+.t3d::after { background: linear-gradient(180deg, var(--c1) 20%, var(--c2) 95%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.orange { --c1: #ffc39a; --c2: #e0703f; --ex: #7a2b12; }
+.white  { --c1: #ffffff; --c2: #dccbff; --ex: #3e1468; }
+.hdr { border: 8px solid #fff; padding: 26px 56px 40px; background: rgba(40,5,70,.25); box-shadow: 0 18px 50px rgba(20,0,40,.45); position: relative; }
+.new { position: absolute; top: -34px; right: -40px; background: var(--mint); color: #063b27; font: 900 38px/1 Unb; padding: 14px 24px 16px; border-radius: 999px; transform: rotate(8deg); box-shadow: 0 7px 0 #1f9c73, 0 16px 30px rgba(0,40,20,.4); }
+
+/* карточка «20+ ч → <3 ч» */
+.cmp { background: #fff; border-radius: 34px; display: flex; align-items: center; box-shadow: 0 18px 0 rgba(30,0,60,.22), 0 30px 60px rgba(20,0,40,.45); }
+.cmp img { display: block; }
+.col { display: flex; flex-direction: column; }
+.lbl { font: 800 34px/1 Unb; color: var(--muted); letter-spacing: 1px; }
+.num { font: 900 110px/1 Unb; letter-spacing: -4px; display: flex; align-items: baseline; margin-top: 12px; }
+.num small { font: 800 44px/1 Unb; letter-spacing: 0; margin-left: 8px; }
+.num .pre { font-size: 72px; margin-right: 2px; }
+.red { color: var(--red); } .green { color: var(--green); }
+.strike { position: relative; }
+.strike::after { content: ''; position: absolute; left: -6px; right: -6px; top: 52%; height: 11px; border-radius: 6px; background: var(--ink); transform: rotate(-9deg); }
+.arrow { flex: none; }
+.pill { border-radius: 999px; padding: 22px 46px 26px; font: 900 54px/1 Unb; color: #fff; background: var(--green); box-shadow: 0 9px 0 #0a7445, 0 20px 44px rgba(0,40,20,.45); white-space: nowrap; }
+.hero { filter: drop-shadow(0 30px 40px rgba(20,0,40,.55)); }
+
+/* ---------- 16:9 ---------- */
+.h { --gx: 74%; --gy: 50%; }
+.h #hdrw { left: 96px; top: 110px; }
+.h #hdrw .t3d { font-size: 150px; }
+.h #sub { left: 100px; top: 408px; }
+.h #sub .t3d { font-size: 92px; }
+.h #cmpw { left: 96px; top: 606px; }
+.h .cmp { height: 250px; padding: 0 44px 0 18px; gap: 22px; }
+.h .hero { left: 1040px; top: 70px; width: 880px; height: 880px; }
+.h #star { left: 1420px; top: 540px; width: 1500px; height: 1500px; margin: -750px 0 0 -750px; }
+.h #rays { left: 1420px; top: 540px; width: 2200px; height: 2200px; margin: -1100px 0 0 -1100px; }
+.h #pillw { right: 90px; top: 890px; transform: rotate(-4deg); }
+
+/* ---------- 9:16 (важное — в центральной зоне 3:4) ---------- */
+.v { --gx: 50%; --gy: 52%; }
+.v #hdrw { left: 0; right: 0; top: 290px; display: flex; justify-content: center; }
+.v #hdrw .t3d { font-size: 150px; }
+.v #sub { left: 0; right: 0; top: 560px; display: flex; justify-content: center; }
+.v #sub .t3d { font-size: 96px; }
+.v .hero { left: 140px; top: 640px; width: 800px; height: 800px; }
+.v #star { left: 540px; top: 1000px; width: 1500px; height: 1500px; margin: -750px 0 0 -750px; }
+.v #rays { left: 540px; top: 1000px; width: 2400px; height: 2400px; margin: -1200px 0 0 -1200px; }
+.v #cmpw { left: 0; right: 0; top: 1310px; display: flex; justify-content: center; }
+.v .cmp { height: 230px; padding: 0 40px 0 14px; gap: 18px; }
+.v .num { font-size: 100px; }
+.v #pillw { left: 0; right: 0; top: 1575px; display: flex; justify-content: center; }
+</style>
+</head>
+<body>
+  <div class="abs" id="bg"></div>
+  <svg class="abs" id="rays" viewBox="-100 -100 200 200"><g id="raysg" fill="#ffd9a8"></g></svg>
+  <svg class="abs" id="star" viewBox="-100 -100 200 200"><path id="starp" fill="#3f0b63"/></svg>
+  <div class="abs" id="grid"></div>
+  <div class="abs" id="glow"></div>
+  <div class="abs" id="vig"></div>
+
+  <img class="abs hero" src="assets/thumb/u09.png" alt="">
+
+  <div class="abs" id="hdrw"><div class="hdr"><div class="t3d orange" data-text="OPUS 5.5">OPUS 5.5</div><div class="new">NEW</div></div></div>
+  <div class="abs" id="sub"><div class="t3d white" data-text="ОБОШЁЛ FABLE">ОБОШЁЛ FABLE</div></div>
+
+  <div class="abs" id="cmpw"><div class="cmp">
+    <img src="assets/thumb/u24.png" width="190" height="190" alt="">
+    <div class="col"><div class="lbl">OPUS 5</div><div class="num red">20+<small>ч</small></div></div>
+    <svg class="arrow" width="96" height="70" viewBox="0 0 96 70"><path d="M6 35h70M52 10l26 25-26 25" stroke="#1d1233" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="col"><div class="lbl">OPUS 5.5</div><div class="num green"><span class="pre">&lt;</span>3<small>ч</small></div></div>
+  </div></div>
+
+  <div class="abs" id="pillw"><div class="pill">в 2,5× дешевле</div></div>
+
+<script>
+document.body.className = new URLSearchParams(location.search).get('v') === 'v' ? 'v' : 'h';
+const pt = (k, n, r1, r2) => { const r = k % 2 ? r2 : r1, a = (k / n) * Math.PI * 2 - Math.PI / 2; return `${(Math.cos(a) * r).toFixed(2)} ${(Math.sin(a) * r).toFixed(2)}`; };
+document.getElementById('starp').setAttribute('d', 'M' + [...Array(16)].map((_, k) => pt(k, 16, 100, 52)).join('L') + 'Z');
+document.getElementById('star').style.transform = 'rotate(11deg)';
+// лучи от героя
+document.getElementById('raysg').innerHTML = [...Array(18)].map((_, k) => {
+  const a0 = (k / 18) * Math.PI * 2, w = .07;
+  const p = a => `${(Math.cos(a) * 100).toFixed(2)} ${(Math.sin(a) * 100).toFixed(2)}`;
+  return `<path d="M0 0L${p(a0 - w)}L${p(a0 + w)}Z" opacity="${k % 2 ? .35 : .7}"/>`;
+}).join('');
+window.READY = Promise.all([document.fonts.ready, ...[...document.images].map(i => i.decode())]);
+</script>
+</body>
+</html>

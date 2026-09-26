@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Opus 5.5 делает видео — превью</title>
+<style>
+@font-face { font-family: Unb; src: url(assets/fonts/Unbounded-VF.ttf); font-weight: 200 900; }
+@font-face { font-family: Man; src: url(assets/fonts/Manrope-VF.ttf); font-weight: 200 800; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #3e0c5c; font-family: Man, sans-serif; -webkit-font-smoothing: antialiased; }
+.abs { position: absolute; }
+
+/* фон как в ролике */
+#bg { inset: 0; background: radial-gradient(90% 110% at 30% 50%, #7a2cbd 0%, #5a168c 42%, #3a0a56 100%); }
+#rays { left: 560px; top: 540px; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px; opacity: .3; mix-blend-mode: screen; transform: rotate(4deg); }
+#star { left: 560px; top: 540px; width: 1500px; height: 1500px; margin: -750px 0 0 -750px; opacity: .6; transform: rotate(11deg); }
+#grid { inset: 0; background-image: linear-gradient(rgba(206,160,255,.28) 2px, transparent 2px), linear-gradient(90deg, rgba(206,160,255,.28) 2px, transparent 2px); background-size: 108px 108px; background-position: -1px -1px; }
+#glow { inset: 0; background: radial-gradient(circle at 30% 50%, rgba(255,196,120,.45) 0, rgba(255,140,90,.18) 18%, transparent 36%); mix-blend-mode: screen; }
+#vig { inset: 0; background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(20,0,35,.6) 100%); }
+
+/* объёмный текст */
+.t3d { position: relative; font: 900 150px/1 Unb; letter-spacing: -3px; color: transparent; white-space: nowrap; }
+.t3d::before, .t3d::after { content: attr(data-text); position: absolute; left: 0; top: 0; }
+.t3d::before { color: var(--ex); text-shadow: 0 3px var(--ex), 0 6px var(--ex), 0 9px var(--ex), 0 12px var(--ex), 0 15px var(--ex), 0 18px var(--ex), 0 30px 34px rgba(15,0,30,.55); }
+.t3d::after { background: linear-gradient(180deg, var(--c1) 20%, var(--c2) 95%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.orange { --c1: #ffc39a; --c2: #e0703f; --ex: #7a2b12; }
+.white  { --c1: #ffffff; --c2: #dccbff; --ex: #3e1468; }
+.yellow { --c1: #ffe36a; --c2: #f5a31a; --ex: #7c4506; }
+.hdr { border: 8px solid #fff; padding: 22px 48px 34px; background: rgba(40,5,70,.25); box-shadow: 0 18px 50px rgba(20,0,40,.45); }
+
+/* «результаты»: телефон с Shorts и карточка превью */
+.phone { width: 432px; height: 768px; border-radius: 58px; background: #16101f; padding: 16px; box-shadow: 0 0 0 4px #3a2d4d, 0 40px 80px rgba(10,0,25,.65); }
+.phone .scr { width: 100%; height: 100%; border-radius: 44px; overflow: hidden; position: relative; }
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; display: block; }
+.phone .bar { position: absolute; left: 22px; right: 22px; bottom: 24px; height: 8px; border-radius: 4px; background: rgba(255,255,255,.35); }
+.phone .bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 38%; border-radius: 4px; background: #ff2d55; }
+.phone .bar i::after { content: ''; position: absolute; right: -9px; top: -6px; width: 20px; height: 20px; border-radius: 50%; background: #ff2d55; }
+.card16 { width: 560px; height: 315px; border-radius: 26px; border: 10px solid #fff; overflow: hidden; box-shadow: 0 30px 70px rgba(10,0,25,.6); background: #fff; }
+.card16 img { width: 100%; height: 100%; display: block; }
+.tag { position: absolute; font: 900 40px/1 Unb; color: #fff; padding: 16px 28px 19px; border-radius: 999px; white-space: nowrap; }
+.tag.red { background: #ff2d55; box-shadow: 0 7px 0 #a8132f, 0 16px 30px rgba(60,0,20,.45); }
+.tag.mint { background: #4fe3b2; color: #063b27; box-shadow: 0 7px 0 #1f9c73, 0 16px 30px rgba(0,40,20,.45); }
+.duck { filter: drop-shadow(0 26px 36px rgba(20,0,40,.6)); }
+</style>
+</head>
+<body>
+  <div class="abs" id="bg"></div>
+  <svg class="abs" id="rays" viewBox="-100 -100 200 200"><g id="raysg" fill="#ffd9a8"></g></svg>
+  <svg class="abs" id="star" viewBox="-100 -100 200 200"><path id="starp" fill="#3f0b63"/></svg>
+  <div class="abs" id="grid"></div>
+  <div class="abs" id="glow"></div>
+  <div class="abs" id="vig"></div>
+
+  <!-- превью (16:9) за телефоном -->
+  <div class="abs" style="left:385px; top:655px; transform: rotate(6deg)">
+    <div class="card16"><img src="assets/thumb/yt_thumb.jpg" alt=""></div>
+    <div class="tag mint" style="right:-26px; bottom:-34px; transform: rotate(-4deg)">ПРЕВЬЮ</div>
+  </div>
+  <!-- телефон с кадром из Shorts -->
+  <div class="abs" style="left:150px; top:140px; transform: rotate(-7deg)">
+    <div class="phone"><div class="scr"><img src="assets/thumb/shorts_frame.jpg" alt=""><div class="bar"><i></i></div></div></div>
+    <div class="tag red" style="left:-44px; top:40px; transform: rotate(-6deg)">SHORTS</div>
+  </div>
+
+  <!-- реакция «не ожидал» -->
+  <img class="abs duck" src="assets/thumb/u03.png" style="left:1430px; top:560px; width:520px; height:520px" alt="">
+
+  <!-- текст -->
+  <div class="abs" style="left:1010px; top:84px"><div class="hdr"><div class="t3d orange" data-text="OPUS 5.5" style="font-size:124px">OPUS 5.5</div></div></div>
+  <div class="abs" style="left:1016px; top:372px"><div class="t3d white" data-text="СДЕЛАЛ">СДЕЛАЛ</div></div>
+  <div class="abs" style="left:1016px; top:556px"><div class="t3d yellow" data-text="ВИДОС" style="font-size:176px">ВИДОС</div></div>
+
+  <!-- стрелка к результатам: от текста к телефону -->
+  <svg class="abs" style="left:640px; top:250px; overflow:visible" width="380" height="240" viewBox="0 0 380 240">
+    <g transform="translate(0 8)" stroke="#1d0a33" stroke-width="30" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M350 200 C 330 70, 180 20, 40 90"/><path d="M95 40 L 38 92 L 105 130"/></g>
+    <g stroke="#fff" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M350 200 C 330 70, 180 20, 40 90"/><path d="M95 40 L 38 92 L 105 130"/></g>
+  </svg>
+
+<script>
+const pt = (k, n, r1, r2) => { const r = k % 2 ? r2 : r1, a = (k / n) * Math.PI * 2 - Math.PI / 2; return `${(Math.cos(a) * r).toFixed(2)} ${(Math.sin(a) * r).toFixed(2)}`; };
+document.getElementById('starp').setAttribute('d', 'M' + [...Array(16)].map((_, k) => pt(k, 16, 100, 52)).join('L') + 'Z');
+document.getElementById('raysg').innerHTML = [...Array(18)].map((_, k) => {
+  const a0 = (k / 18) * Math.PI * 2, w = .07, p = a => `${(Math.cos(a) * 100).toFixed(2)} ${(Math.sin(a) * 100).toFixed(2)}`;
+  return `<path d="M0 0L${p(a0 - w)}L${p(a0 + w)}Z" opacity="${k % 2 ? .35 : .7}"/>`;
+}).join('');
+window.READY = Promise.all([document.fonts.ready, ...[...document.images].map(i => i.decode())]);
+</script>
+</body>
+</html>
